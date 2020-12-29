@@ -32,9 +32,11 @@ class IrfController extends Controller
             'province' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'zipCode' => 'required|string|max:25',
+            //Contact Details
             'phoneHome' => 'required|string|max:15',
             'phoneCell' => 'required|string|max:15',
             'phoneWork' => 'required|string|max:15',
+            'firstLang' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'EmerContactName' => 'required|string|max:255',
             'EmerContactNo' => 'required|string|max:15',
@@ -43,7 +45,14 @@ class IrfController extends Controller
             'notes' => 'required|string|max:255',
             //'notes_last_edited_byName' => 'required|string|max:255',
             //'notes_last_edited_byRole' => 'required|string|max:255',
-                        
+            //IRF Program
+            'programName' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            //Child Details
+            'childFirstname' => 'required|string|max:255',
+            'childLastname' => 'required|string|max:255',
+            'childDob' => 'required|string|max:255',
+
             ]);
         $useremail = $request->email;
         if($validator->fails()){
@@ -90,5 +99,3 @@ class IrfController extends Controller
         return response()->json(Irf::all());
      }
 }
-
-\
