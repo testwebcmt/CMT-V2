@@ -62,7 +62,41 @@ class IrfController extends Controller
         $irf = Irf::create([
             //Basic Details            
             'firstname' => $request->json()->get('firstname'),
+            'middleName' => $request->json()->get('middleName'),
+            'lastName' => $request->json()->get('lastName'),
+            'gender' => $request->json()->get('gender'),
+            'age' => $request->json()->get('age'),
+            'streetAddress' => $request->json()->get('streetAddress'),
+            'city' => $request->json()->get('city'),
+            'province' => $request->json()->get('province'),
+            'country' => $request->json()->get('country'),
+            'zipCode' => $request->json()->get('zipCode'),
+            //Contact Details
+            'phoneHome' => $request->json()->get('phoneHome'),
+            'phoneCell' => $request->json()->get('phoneCell'),
+            'phoneWork' => $request->json()->get('phoneWork'),
+            'firstLang' => $request->json()->get('firstLang'),
+            'email' => $request->json()->get('email'),
+            'EmerContactName' => $request->json()->get('EmerContactName'),
+            'EmerContactNo' => $request->json()->get('EmerContactNo'),
+            'aboutUs' => $request->json()->get('aboutUs'),
+            //'ChildValue' => $request->json()->get('ChildValue'),
+            'notes' => $request->json()->get('notes'),
+            //Child Details
+            // 'ChildAr' => ['childFirstname' => 'required|string|max:255',
+            // 'childLastname' => 'required|string|max:255',
+            // 'childDob' => 'required|string|max:255',]
             ]);
+            $ChildValue = $request->input('rows');
+            foreach ($ChildValue as $row)
+            {
+                $child[] = [
+                    'parentId' => $irf->userId,
+                    'childFirstname' => $row['childFirstname'],
+                    'childLastname' => $row['childLastname'],
+                    'childDob' => $row['childDob']
+                ];
+            }
 
         //$token = JWTAuth::fromUser($irf);
 
