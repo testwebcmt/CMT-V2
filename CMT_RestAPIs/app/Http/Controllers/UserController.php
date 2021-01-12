@@ -32,7 +32,7 @@ class UserController extends Controller
             'country' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'postal' => 'required|string|max:255',
+            'postal' => 'required|string|max:255'
         ]);
 
         if($validator->fails()){
@@ -57,8 +57,16 @@ class UserController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
+        $test2 = test2::create([
+            'firstName' => $request->json()->get('firstName'),
+            'middleName' => $request->json()->get('middleName'),
+            'lastName' => $request->json()->get('lastName'),
+        ]);
+        
         return response()->json(compact('user','token'),201);
     }
+
+
     
     public function login(Request $request)
     {
@@ -93,6 +101,7 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
     
+
     public function checkemail(Request $request)
     {
         $email = $request->get('email');

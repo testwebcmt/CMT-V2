@@ -20,7 +20,7 @@ class IrfController extends Controller
     //
     public function irf_register(Request $request)
     {
-        $validator = Validator::make($request->json()->all() , [
+       /* $validator = Validator::make($request->json()->all() , [
             //Basic Details
             'firstName' => 'required|string|max:255',
             'middleName' => 'required|string|max:255',
@@ -59,7 +59,7 @@ class IrfController extends Controller
                 return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $irf = Irf::create([
+        $irf = tb_init_user_details::create([
             //Basic Details            
             'firstname' => $request->json()->get('firstname'),
             'middleName' => $request->json()->get('middleName'),
@@ -87,16 +87,25 @@ class IrfController extends Controller
             // 'childLastname' => 'required|string|max:255',
             // 'childDob' => 'required|string|max:255',]
             ]);
-            $ChildValue = $request->input('rows');
-            foreach ($ChildValue as $row)
-            {
-                $child[] = [
-                    'parentId' => $irf->userId,
-                    'childFirstname' => $row['childFirstname'],
-                    'childLastname' => $row['childLastname'],
-                    'childDob' => $row['childDob']
-                ];
-            }
+            $email = $request->json()->get('email');
+            $userId = Irf::where('email',$email)
+          */  
+            childFirstname = $request->json()->get('childFirstname');
+            childLastname = $request->json()->get('childFirstname');
+            childDob = $request->json()->get('childFirstname');
+
+            for($i=0; $i<= count($ChildFN['childFirstname']); $i++) {
+            
+              if(empty($ChildFN['childFirstname'][$i]) || !is_numeric($ChildFN['childFirstname'][$i])) continue;
+            
+              $data2 = [ 
+                'childFirstname' => $ChildFN['nameEn'][$i],
+                'childLastname' => $ChildLN['nameEn'][$i],
+                'childDob' => $ChildDOB['nameEn'][$i],
+                'parentId' => $request->get('Id');,
+                  ];
+                }
+                  tb_child_details::create($data2);
 
         //$token = JWTAuth::fromUser($irf);
 
@@ -106,6 +115,22 @@ class IrfController extends Controller
     public function addchild(Request $request)
     {
 
+        childFirstname = $request->json()->get('childFirstname');
+        childLastname = $request->json()->get('childLasttname');
+        childDob = $request->json()->get('childDob');
+
+        for($i=0; $i<= count($ChildFN['childFirstname']); $i++) {
+        
+          if(empty($ChildFN['childFirstname'][$i]) || !is_numeric($ChildFN['childFirstname'][$i])) continue;
+        
+          $data2 = [ 
+            'childFirstname' => $ChildFN['nameEn'][$i],
+            'childLastname' => $ChildLN['nameEn'][$i],
+            'childDob' => $ChildDOB['nameEn'][$i],
+            'parentId' => $request->get('Id');,
+              ];
+            }
+              tb_child_details::create($data2);
     }
 
     public function irf_search(Request $request)

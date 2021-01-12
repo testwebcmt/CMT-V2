@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTbChildDetailsTable extends Migration
+class CreateTestTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateTbChildDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_child_details', function (Blueprint $table) {
-            //$table->id(); 
+        Schema::create('test', function (Blueprint $table) {
             $table->Increments('id')->unique();           
             $table->string('childFirstname');
             $table->string('childLastname');
             $table->string('childDob');            
             $table->bigInteger('parentId')->unsigned();
-
-            $table->foreign('parentId')->references('userId')->on('tb_init_user_details')->onDelete('cascade');
-            $table->timestamps();
-
         });
     }
 
@@ -34,6 +29,6 @@ class CreateTbChildDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_child_details');
+        Schema::dropIfExists('test');
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+
+
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +28,6 @@ Route::post('login', 'App\Http\Controllers\UserController@login');
 
 Route::get('profile', 'App\Http\Controllers\UserController@getAuthenticatedUser');
 
+Route::post('register1', 'App\Http\Controllers\test2@register');
+
+Route::post('irf', 'App\Http\Controllers\test@irf');
