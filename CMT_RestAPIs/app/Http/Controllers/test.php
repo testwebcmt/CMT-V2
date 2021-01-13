@@ -39,7 +39,22 @@ class test extends BaseController
             'aboutUs' => 'required|string|max:255',
             'ChildValue' => 'required|string|max:255',
             'notes_last_edited_byName' => 'required|string|max:255',
-            'notes_last_edited_byRole' => 'required|string|max:255'
+            'notes_last_edited_byRole' => 'required|string|max:255',
+            'myHealth' => 'required|string|max:255',
+            'myLifeSatisfaction' => 'required|string|max:255',
+            'mySocialNetwork' => 'required|string|max:255',
+            'myCommunityNetwork' => 'required|string|max:255',
+            'myStressLevel' => 'required|string|max:255',
+            'myHealthIssues' => 'required|string|max:255',
+            'myFamilyDoctor' => 'required|string|max:255',
+            'myVisitToFamilyDoctor' => 'required|string|max:255',
+            'myVisitToClinic' => 'required|string|max:255',
+            'myVisitToEmergency' => 'required|string|max:255',
+            'myVisitToHospital' => 'required|string|max:255',
+            'myDiseaseAwareness' => 'required|string|max:255',
+            'myCmtProgramAwareness' => 'required|string|max:255',
+            'myPhysicalActiveness' => 'required|string|max:255',
+            'cmtAgent' => 'required|string|max:255',
         ]);
 
         if($validator->fails())
@@ -70,6 +85,7 @@ class test extends BaseController
             'notes' => $request->json()->get('notes'),
             'notes_last_edited_byName' => $request->json()->get('notes_last_edited_byName'),
             'notes_last_edited_byRole' => $request->json()->get('notes_last_edited_byRole'),
+            
         ]);
 
                 $ChildDetails = $request->json()->get('child_program');
@@ -87,35 +103,71 @@ class test extends BaseController
             
                // return response($data2, 200);
 
+                
+
                $Programs = $request->json()->get('userprograms');
               
                foreach($Programs as $key => $title)
                {
                     foreach($title as $key2 => $val)
                         {
-                            $data3 = new tb_init_user_program_detail();
-                            $data3->programName = $key;
-                            $data3->category = $val['value'];
-                            $data3->userId = $user->id;
-                            $data3->save();
-                        }    
+                                 $checker2 = $val['isChecked'];
+                                if($checker2 == 'true')
+                                    { 
+                                        $data3 = new tb_init_user_program_detail();
+                                        $data3->programName = $key;
+                                        $data3->category = $val['value'];
+                                        $data3->userId = $user->id;
+                                        $data3->save();
+                                    }
+                            }
+                            
                }
-              
 
-               $ChildDetails = $request->json()->get('MemberDetails');
+               $Afterschool = $request->json()->get('after_school_program');
 
-               $data4 = new tb_init_user_extra_detail();
-
-               foreach($ChildDetails as $key => $title)
-               {              
-                   foreach($title as $key2 => $val)
-                   {                        
-                         $data4->$key = $val['value'];   
-                   }
+               if($Afterschool == 'yes')
+               {
+                $data4 = new tb_init_user_program_detail();
+                $data4->programName = "AfterSchool";
+                $data4->category = "AfterSchool";
+                $data4->userId = $user->id;
+                $data4->save();
                }
-               $data4->cmtAgent = $user->id;
-               $data4->userId = $user->id;
-               $data4->save(); 
+
+               $other = $request->json()->get('Others');
+
+               if(!empty($other)) 
+               {
+                $data5 = new tb_init_user_program_detail();
+                $data5->programName = "Other";
+                $data5->category = $other;
+                $data5->userId = $user->id;
+                $data5->save();
+               }
+                          
+               $memdetails = tb_init_user_extra_detail::create([
+                'myHealth' => $request->json()->get('myHealth'),
+                'myLifeSatisfaction' => $request->json()->get('myLifeSatisfaction'),
+                'mySocialNetwork' => $request->json()->get('mySocialNetwork'),
+                'myCommunityNetwork' => $request->json()->get('myCommunityNetwork'),
+                'myStressLevel' => $request->json()->get('myStressLevel'),
+                'myHealthIssues' => $request->json()->get('myHealthIssues'),
+                'myFamilyDoctor' => $request->json()->get('myFamilyDoctor'),
+                'myVisitToFamilyDoctor' => $request->json()->get('myVisitToFamilyDoctor'),
+                'myVisitToClinic' => $request->json()->get('myVisitToClinic'),
+                'myVisitToEmergency' => $request->json()->get('myVisitToEmergency'),
+                'myVisitToHospital' => $request->json()->get('myVisitToHospital'),
+                'myDiseaseAwareness' => $request->json()->get('myDiseaseAwareness'),
+                'myCmtProgramAwareness' => $request->json()->get('myCmtProgramAwareness'),
+                'myPhysicalActiveness' => $request->json()->get('myPhysicalActiveness'),
+                'cmtAgent' => $request->json()->get('LoggedAgent'),
+                'userId' => $user->id
+               ]);
+                
+
+               //Creating Array for Response
+             
                $display = $user->id;  
                return response($display, 200);
     }
