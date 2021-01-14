@@ -38,8 +38,6 @@ class test extends BaseController
             'EmerContactNo' => 'required|string|max:255',
             'aboutUs' => 'required|string|max:255',
             'ChildValue' => 'required|string|max:255',
-            'notes_last_edited_byName' => 'required|string|max:255',
-            'notes_last_edited_byRole' => 'required|string|max:255',
             'myHealth' => 'required|string|max:255',
             'myLifeSatisfaction' => 'required|string|max:255',
             'mySocialNetwork' => 'required|string|max:255',
@@ -54,7 +52,7 @@ class test extends BaseController
             'myDiseaseAwareness' => 'required|string|max:255',
             'myCmtProgramAwareness' => 'required|string|max:255',
             'myPhysicalActiveness' => 'required|string|max:255',
-            'cmtAgent' => 'required|string|max:255',
+            
         ]);
 
         if($validator->fails())
@@ -82,10 +80,7 @@ class test extends BaseController
             'EmerContactNo' => $request->json()->get('EmerContactNo'),
             'aboutUs' => $request->json()->get('aboutUs'),
             'ChildValue' => $request->json()->get('ChildValue'),
-            'notes' => $request->json()->get('notes'),
-            'notes_last_edited_byName' => $request->json()->get('notes_last_edited_byName'),
-            'notes_last_edited_byRole' => $request->json()->get('notes_last_edited_byRole'),
-            
+            'notes' => $request->json()->get('notes')            
         ]);
 
                 $ChildDetails = $request->json()->get('child_program');
@@ -164,7 +159,7 @@ class test extends BaseController
                 'cmtAgent' => $request->json()->get('LoggedAgent'),
                 'userId' => $user->id
                ]);
-                
+              
 
                //Creating Array for Response
              
