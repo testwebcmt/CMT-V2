@@ -31,3 +31,5 @@ Route::get('profile', 'App\Http\Controllers\UserController@getAuthenticatedUser'
 Route::post('register1', 'App\Http\Controllers\test2@register');
 
 Route::post('irf', 'App\Http\Controllers\test@irf');
+
+Route::GET('irfsearch', 'App\Http\Controllers\Irfsearch@irfsearch');
