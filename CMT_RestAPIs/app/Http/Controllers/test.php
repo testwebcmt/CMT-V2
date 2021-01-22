@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller as BaseController;
 
 class test extends BaseController
@@ -20,13 +21,15 @@ class test extends BaseController
 
     public function irf(Request $request)
     {
+      
+       
 
         $validator = Validator::make($request->json()->all() , [
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'streetAddress' => 'required|string|max:255',
             'gender' => 'required|string|max:255',
-            'age' => 'required|integer|max:11',
+            'age' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'country' => 'required|string|max:255',
@@ -59,6 +62,11 @@ class test extends BaseController
             {
                 return response()->json($validator->errors()->toJson(), 400);
             } 
+
+            DB::beginTransaction();
+
+        try{
+            
 
         $user = tb_init_user_detail::create([
             'firstName' => $request->json()->get('firstName'),
@@ -160,7 +168,14 @@ class test extends BaseController
                 'userId' => $user->id
                ]);
               
+               DB::commit();
 
+            } catch (Exception $e) {
+        
+                Log::warning(sprintf('Exception: %s', $e->getMessage()));
+        
+                DB::rollBack();
+            }
                //Creating Array for Response
              
                $display = $user->id;  
