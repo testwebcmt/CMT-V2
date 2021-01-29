@@ -35,7 +35,7 @@ class test extends BaseController
             'country' => 'required|string|max:255',
             'zipCode' => 'required|string|max:255',
             'phoneCell' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
+            'email' => 'required|string|unique:tb_init_user_details,email|max:255',
             'firstLang' => 'required|string|max:255',
             'EmerContactName' => 'required|string|max:255',
             'EmerContactNo' => 'required|string|max:255',
@@ -172,7 +172,7 @@ class test extends BaseController
 
             } catch (Exception $e) {
         
-                Log::warning(sprintf('Exception: %s', $e->getMessage()));
+              //  Log::warning(sprintf('Exception: %s', $e->getMessage()));
         
                 DB::rollBack();
             }
