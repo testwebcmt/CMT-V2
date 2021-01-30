@@ -33,3 +33,5 @@ Route::post('register1', 'App\Http\Controllers\test2@register');
 Route::post('irf', 'App\Http\Controllers\test@irf');
 
 Route::GET('irfsearch', 'App\Http\Controllers\Irfsearch@irfsearch');
+
+Route::post('userupdate', 'App\Http\Controllers\Irf_UserUpdate@UserUpdate');
