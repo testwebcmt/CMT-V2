@@ -27,7 +27,9 @@ class IrfSearch extends BaseController
       //return response($photos, 200);
         
        // $user =  tb_init_user_detail::where('userId', $userId)->first();
-       $data = $request->json()->get('data');
+       //$data = $request->json()->get('data');
+
+       $data = $request->input('data', false);
 
        $search_users = tb_init_user_detail::where('userId',$data)
                                            ->orwhere('email',$data)
