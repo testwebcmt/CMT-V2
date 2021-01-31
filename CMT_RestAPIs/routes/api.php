@@ -34,4 +34,7 @@ Route::post('irf', 'App\Http\Controllers\test@irf');
 
 Route::GET('irfsearch', 'App\Http\Controllers\Irfsearch@irfsearch');
 
-Route::post('userupdate', 'App\Http\Controllers\Irf_UserUpdate@UserUpdate');
+Route::put('userupdate', 'App\Http\Controllers\Irf_UserUpdate@UserUpdate');
+
+Route::post('programupdate', 'App\Http\Controllers\Irf_ProgramUpdate@ProgramUpdate');
+
