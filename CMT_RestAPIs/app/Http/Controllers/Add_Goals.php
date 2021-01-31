@@ -98,11 +98,17 @@ class Add_Goals extends BaseController
         
         $program= $request->json()->get('ProgramName');
 
+        $data1= tb_init_user_goals::where('userId', $id)
+                                        ->where('user_goal_program_name',$program)
+                                        ->first();
+
+            
+
         DB::table('tb_init_user_goals')->where('userId', $id)
                                                 ->where('user_goal_program_name',$program)
                                                 ->delete();
 
-                                                return response("Goal Deleted", 200);                                        
+        return response("Goal Deleted", 200);                                        
     }
 
 }

@@ -42,4 +42,6 @@ Route::post('addgoal', 'App\Http\Controllers\Add_Goals@AddGoals');
 
 Route::post('deletegoal', 'App\Http\Controllers\Add_Goals@deletegoals');
 
+Route::post('childupdate', 'App\Http\Controllers\Child_Details@ChildUpdate');
+
 Route::get('getprograms/{id}', 'App\Http\Controllers\Add_Goals@getprogramdetails');
