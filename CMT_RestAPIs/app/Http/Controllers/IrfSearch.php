@@ -5,7 +5,7 @@ use App\Models\tb_init_user_detail;
 use App\Models\tb_child_detail;
 use App\Models\tb_init_user_program_detail;
 use App\Models\tb_init_user_extra_detail;
-
+use App\Models\tb_init_user_goals;
 use Illuminate\Http\Request;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -18,7 +18,7 @@ class IrfSearch extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function irfsearch(Request $request)
+    public function irfsearch($data)
     {
 
       //  $userId = $request->json()->get('userId');
@@ -29,7 +29,7 @@ class IrfSearch extends BaseController
        // $user =  tb_init_user_detail::where('userId', $userId)->first();
        //$data = $request->json()->get('data');
 
-       $data = $request->input('data', false);
+      // $data = $request->input('data', false);
 
        $search_users = tb_init_user_detail::where('userId',$data)
                                            ->orwhere('email',$data)
@@ -65,11 +65,12 @@ class IrfSearch extends BaseController
         $HealthDetails = tb_init_user_extra_detail::where('userId',$id)->get();
 
 
-        //$GoalDetails = tb_init_user_goals::where('userId',$id);
+        $GoalDetails = tb_init_user_goals::where('userId',$id)->get();
 
       // //Creating Array for Response
         $search['User_Details'] = $search_users;
         $search['Child_Details'] = $search_child;
+        $search['GoalDetails'] = $GoalDetails;
         $search['Program_Details'] = $ProgramDetails;
         $search['Health_Details'] = $HealthDetails;
                   

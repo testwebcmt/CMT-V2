@@ -32,9 +32,12 @@ Route::post('register1', 'App\Http\Controllers\test2@register');
 
 Route::post('irf', 'App\Http\Controllers\test@irf');
 
-Route::GET('irfsearch', 'App\Http\Controllers\Irfsearch@irfsearch');
+Route::GET('irfsearch/{data}', 'App\Http\Controllers\Irfsearch@irfsearch');
 
 Route::put('userupdate', 'App\Http\Controllers\Irf_UserUpdate@UserUpdate');
 
 Route::post('programupdate', 'App\Http\Controllers\Irf_ProgramUpdate@ProgramUpdate');
 
+Route::post('addgoal', 'App\Http\Controllers\Add_Goals@AddGoals');
+
+Route::get('getprograms/{id}', 'App\Http\Controllers\Add_Goals@getprogramdetails');

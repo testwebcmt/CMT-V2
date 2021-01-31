@@ -10,9 +10,13 @@ class tb_init_user_goals extends Model
     use HasFactory;
     /**
      * The attributes that are mass assignable.
+     * 
+     
      *
      * @var array
      */
+    protected $table = 'tb_init_user_goals';
+
     protected $fillable = [
         'user_goal_category_name',
         'user_goal_program_name',
@@ -24,7 +28,7 @@ class tb_init_user_goals extends Model
         'user_goal_program_additionalcomments',
         'user_goal_program_status',
         'user_goal_program_RatingBefore',
-        'user_goal_program_RatingAfter',
-        
+        'user_goal_program_RatingAfter',  
+        'userId'  
     ];
 }
