@@ -118,8 +118,8 @@ class test extends BaseController
                                 if($checker2 == 'true')
                                     { 
                                         $data3 = new tb_init_user_program_detail();
-                                        $data3->programName = $key;
-                                        $data3->category = $val['value'];
+                                        $data3->programName = $val['value'];
+                                        $data3->category = $key;
                                         $data3->userId = $user->id;
                                         $data3->save();
                                     }
@@ -143,8 +143,8 @@ class test extends BaseController
                if(!empty($other)) 
                {
                 $data5 = new tb_init_user_program_detail();
-                $data5->programName = "Other";
-                $data5->category = $other;
+                $data5->programName = $other;
+                $data5->category = "Other";
                 $data5->userId = $user->id;
                 $data5->save();
                }

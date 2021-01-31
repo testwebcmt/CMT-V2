@@ -33,13 +33,13 @@ class Irf_ProgramUpdate extends BaseController
                           if($checker2 == 'true')
                              { 
                                $data= tb_init_user_program_detail::where('userId', $id)
-                                                                    ->where('category',$val['value'])
+                                                                    ->where('programName',$val['value'])
                                                                     ->first(); 
                                 if(is_null($data))
                                     {
                                         $data3= tb_init_user_program_detail::upsert([
-                                        'programName' => $key,
-                                        'category' => $val['value'],
+                                        'programName' => $val['value'],
+                                        'category' => $key,
                                         'userId' => $id],'userId',['programName','category','userId']);        
                                     }
                                 }
@@ -47,7 +47,7 @@ class Irf_ProgramUpdate extends BaseController
                             {
                              
                                         DB::table('tb_init_user_program_details')->where('userId', $id)
-                                                                        -> where('category', $val['value'])
+                                                                        -> where('programName', $val['value'])
                                                                         ->delete();
                                              
                             }                                        
@@ -79,20 +79,20 @@ class Irf_ProgramUpdate extends BaseController
         $other = $request->json()->get('Others');
             
             $data5= tb_init_user_program_detail::where('userId', $id)
-            ->where('programName','Other')
+            ->where('category','Other')
             ->first();
 
                     if(is_null($data5))
                      {
                       $data6 = tb_init_user_program_detail::upsert([
-                        'programName' => "Other",
-                        'category' => $other,
+                        'programName' => $other,
+                        'category' => "Other",
                         'userId' => $id],'userId',['programName','category','userId']);
                       }
                       else
                       {
                         $data6=tb_init_user_program_detail::where('userId',$id)
-                                                ->where('programName','Other')
+                                                ->where('category','Other')
                                                 ->update([
                                                     'programName' => "Other",
                                                     'category' => $other,

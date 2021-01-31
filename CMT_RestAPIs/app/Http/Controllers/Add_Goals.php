@@ -55,9 +55,38 @@ class Add_Goals extends BaseController
     }
     public function getprogramdetails($id)
     {
-        $result = DB::Table('tb_init_user_program_details')->select('category','programName')->where('userId',$id)->get();
+        $HealthResults = DB::Table('tb_init_user_program_details')->select('programName')->where('userId',$id)
+                                                                                        ->where('category','health')
+                                                                                        ->pluck('programName');
+                                                                                       
 
-        return response($result, 200);
+        $EmploymentResults = DB::Table('tb_init_user_program_details')->select('programName')->where('userId',$id)
+                                                                                        ->where('category','employment')
+                                                                                        ->pluck('programName');
+                                                                                      
+        
+        $NeighbourhoodResults = DB::Table('tb_init_user_program_details')->select('programName')->where('userId',$id)
+                                                                                        ->where('category','neighbourhood')
+                                                                                        ->pluck('programName');
+                                                                                       
+                                                                                       
+        $StaffResults = DB::Table('tb_init_user_program_details')->select('programName')->where('userId',$id)
+                                                                                        ->where('category','staff')
+                                                                                        ->pluck('programName');
+                                                                                        
+       
+        $AfterschoolResults = DB::Table('tb_init_user_program_details')->select('programName')->where('userId',$id)
+                                                                                        ->where('category','AfterSchool')
+                                                                                        ->pluck('programName');
+                                                                                        
+       
+                                                                                        $search['HealthResults'] = $HealthResults;
+                                                                                        $search['EmploymentResults'] = $EmploymentResults;
+                                                                                        $search['NeighbourhoodResults'] = $NeighbourhoodResults;
+                                                                                        $search['StaffResults'] = $StaffResults;
+                                                                                        $search['AfterschoolResults'] = $AfterschoolResults;                                                                             
+        
+         return response($search, 200);
 
     
     }
