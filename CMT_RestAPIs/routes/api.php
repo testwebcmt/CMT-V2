@@ -40,4 +40,6 @@ Route::post('programupdate', 'App\Http\Controllers\Irf_ProgramUpdate@ProgramUpda
 
 Route::post('addgoal', 'App\Http\Controllers\Add_Goals@AddGoals');
 
+Route::post('deletegoal', 'App\Http\Controllers\Add_Goals@deletegoals');
+
 Route::get('getprograms/{id}', 'App\Http\Controllers\Add_Goals@getprogramdetails');

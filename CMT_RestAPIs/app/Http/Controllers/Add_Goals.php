@@ -91,6 +91,18 @@ class Add_Goals extends BaseController
     
     }
 
+    public function deletegoals(Request $request)
+    {
 
+        $id= $request->json()->get('userId');
+        
+        $program= $request->json()->get('ProgramName');
+
+        DB::table('tb_init_user_goals')->where('userId', $id)
+                                                ->where('user_goal_program_name',$program)
+                                                ->delete();
+
+                                                return response("Goal Deleted", 200);                                        
+    }
 
 }
