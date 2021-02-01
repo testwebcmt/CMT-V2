@@ -102,13 +102,18 @@ class Add_Goals extends BaseController
                                         ->where('user_goal_program_name',$program)
                                         ->first();
 
-            
+            if(!empty($data1))
+            {
 
         DB::table('tb_init_user_goals')->where('userId', $id)
                                                 ->where('user_goal_program_name',$program)
                                                 ->delete();
 
-        return response("Goal Deleted", 200);                                        
+        return response("Goal Deleted", 200);
+            }
+            else{
+                return response("Goal Not Available", 200); 
+            }                                        
     }
 
 }

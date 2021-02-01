@@ -24,7 +24,7 @@ class Child_Details extends BaseController
 
         $id = $request->json()->get('userId');
 
-       
+       $ChildDetails = $request->json()->get('child_program');
                 
         foreach($ChildDetails as $key => $title)
         {
@@ -40,4 +40,55 @@ class Child_Details extends BaseController
 
                
 }
+public function Childdelete(Request $request)
+{
+
+    $id = $request->json()->get('userId');
+
+    $ChildDetails = $request->json()->get('child_program');
+             
+     foreach($ChildDetails as $key => $title)
+     {
+         $childid = $title['childId'];
+         
+         $data1= tb_child_detail::where('parentId', $id)
+                            ->where('childId',$childid)
+                            ->first();
+
+        if(!empty($data1))
+            {
+
+                DB::table('tb_child_details')->where('parentId', $id)
+                                            ->where('childId',$childid)
+                                            ->delete();            
+            }
+        else
+            {
+                return response("Child Not Available", 200); 
+            }  
+        }
+        return response("Child Deleted", 200);
+        }
+
+        public function AddChild(Request $request)
+        {
+
+            $id = $request->json()->get('userId');
+
+            $ChildDetails = $request->json()->get('child_program');
+                
+                foreach($ChildDetails as $key => $title)
+                {
+                    $data2 = new tb_child_detail();
+                    $data2->childFirstname = $title['childFirstName'];
+                    $data2->childLastname = $title['childLastName'];
+                    $data2->childDob = $title['childBirthDate'];
+                    $data2->parentId = $id;
+                    $data2->save();
+                }
+
+                return response("Child Added", 200);
+
+
+        }
 }
