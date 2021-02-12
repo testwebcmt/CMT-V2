@@ -46,7 +46,7 @@ class reports extends BaseController
                                               ->groupBy('tb_init_user_details.userId')
                                               ->get(); 
   
-                                  $search['report'] = $result;
+                                  $search['programreport'] = $result;
   
                                   return response($search,200);
 
@@ -63,7 +63,7 @@ class reports extends BaseController
                               ->groupBy('tb_init_user_details.userId')
                               ->get(); 
 
-                               $search['report'] = $result;
+                               $search['programreport'] = $result;
 
                               return response($search,200);
 
@@ -83,7 +83,7 @@ class reports extends BaseController
                                       ->groupBy('tb_init_user_details.userId')
                                       ->get(); 
 
-                          $search['report'] = $result;
+                          $search['programreport'] = $result;
 
                           return response($search,200);
 
@@ -97,7 +97,7 @@ class reports extends BaseController
                                         ->groupBy('tb_init_user_details.userId')
                                         ->get(); 
 
-                            $search['report'] = $result;
+                            $search['programreport'] = $result;
 
                             return response($search,200);
 
@@ -121,7 +121,7 @@ class reports extends BaseController
                                   ->groupBy('tb_init_user_details.userId')
                                   ->get(); 
 
-                         $search['report'] = $result;
+                         $search['programreport'] = $result;
 
                          return response($search,200);
 
@@ -135,7 +135,7 @@ class reports extends BaseController
                                         ->groupBy('tb_init_user_details.userId')
                                         ->get(); 
 
-                          $search['report'] = $result;
+                          $search['programreport'] = $result;
 
                           return response($search,200);
 
@@ -153,7 +153,7 @@ class reports extends BaseController
                                           ->groupBy('tb_init_user_details.userId')
                                           ->get(); 
 
-                                $search['report'] = $result;
+                                $search['programreport'] = $result;
 
                                 return response($search,200);
 
@@ -188,7 +188,7 @@ class reports extends BaseController
                                               ->groupBy('tb_init_user_details.userId')
                                               ->get(); 
   
-                                  $search['report'] = $result;
+                                  $search['goalreport'] = $result;
   
                                   return response($search,200);
 
@@ -205,7 +205,7 @@ class reports extends BaseController
                               ->groupBy('tb_init_user_details.userId')
                               ->get(); 
 
-                               $search['report'] = $result;
+                               $search['goalreport'] = $result;
 
                               return response($search,200);
 
@@ -225,7 +225,7 @@ class reports extends BaseController
                               ->groupBy('tb_init_user_details.userId')
                               ->get();  
 
-                          $search['report'] = $result;
+                          $search['goalreport'] = $result;
 
                           return response($search,200);
 
@@ -239,7 +239,7 @@ class reports extends BaseController
                             ->groupBy('tb_init_user_details.userId')
                             ->get(); 
 
-                            $search['report'] = $result;
+                            $search['goalreport'] = $result;
 
                             return response($search,200);
 
@@ -263,7 +263,7 @@ class reports extends BaseController
                                   ->groupBy('tb_init_user_details.userId')
                                   ->get(); 
 
-                         $search['report'] = $result;
+                         $search['goalreport'] = $result;
 
                          return response($search,200);
 
@@ -277,7 +277,7 @@ class reports extends BaseController
                       ->groupBy('tb_init_user_details.userId')
                       ->get(); 
 
-                          $search['report'] = $result;
+                          $search['goalreport'] = $result;
 
                           return response($search,200);
 
@@ -295,7 +295,7 @@ class reports extends BaseController
                                 ->groupBy('tb_init_user_details.userId')
                                 ->get();  
 
-                                $search['report'] = $result;
+                                $search['goalreport'] = $result;
 
                                 return response($search,200);
 
@@ -330,7 +330,7 @@ class reports extends BaseController
                                               ->groupBy('tb_init_user_details.userId')
                                               ->get(); 
   
-                                  $search['report'] = $result;
+                                  $search['notesreport'] = $result;
   
                                   return response($search,200);
 
@@ -347,7 +347,7 @@ class reports extends BaseController
                               ->groupBy('tb_init_user_details.userId')
                               ->get(); 
 
-                               $search['report'] = $result;
+                               $search['notesreport'] = $result;
 
                               return response($search,200);
 
@@ -367,7 +367,7 @@ class reports extends BaseController
                               ->groupBy('tb_init_user_details.userId')
                               ->get();  
 
-                          $search['report'] = $result;
+                          $search['notesreport'] = $result;
 
                           return response($search,200);
 
@@ -381,7 +381,7 @@ class reports extends BaseController
                             ->groupBy('tb_init_user_details.userId')
                             ->get(); 
 
-                            $search['report'] = $result;
+                            $search['notesreport'] = $result;
 
                             return response($search,200);
 
@@ -405,7 +405,7 @@ class reports extends BaseController
                                   ->groupBy('tb_init_user_details.userId')
                                   ->get(); 
 
-                         $search['report'] = $result;
+                         $search['notesreport'] = $result;
 
                          return response($search,200);
 
@@ -419,7 +419,7 @@ class reports extends BaseController
                       ->groupBy('tb_init_user_details.userId')
                       ->get(); 
 
-                          $search['report'] = $result;
+                          $search['notesreport'] = $result;
 
                           return response($search,200);
 
@@ -437,7 +437,7 @@ class reports extends BaseController
                                 ->groupBy('tb_init_user_details.userId')
                                 ->get();  
 
-                                $search['report'] = $result;
+                                $search['notesreport'] = $result;
 
                                 return response($search,200);
 
