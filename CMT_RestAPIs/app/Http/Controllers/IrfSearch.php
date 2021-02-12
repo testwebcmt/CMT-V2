@@ -7,12 +7,13 @@ use App\Models\tb_init_user_program_detail;
 use App\Models\tb_init_user_extra_detail;
 use App\Models\tb_init_user_goals;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Collection;
 
 class IrfSearch extends BaseController
 {
@@ -20,16 +21,6 @@ class IrfSearch extends BaseController
 
     public function irfsearch($data)
     {
-
-      //  $userId = $request->json()->get('userId');
-
-     // $photos = tb_init_user_detail::all();
-      //return response($photos, 200);
-        
-       // $user =  tb_init_user_detail::where('userId', $userId)->first();
-       //$data = $request->json()->get('data');
-
-      // $data = $request->input('data', false);
 
        $search_users = tb_init_user_detail::where('userId',$data)
                                            ->orwhere('email',$data)
@@ -48,36 +39,82 @@ class IrfSearch extends BaseController
           }       
        
         //Getting the User Id from the Query
-        $id = $resultArr['userId'];
+          $id = $resultArr['userId'];
         
         //Searching Child Details
-        $search_child = tb_child_detail::where('parentId',$id)->get();
+          $search_child = tb_child_detail::where('parentId',$id)->get();
+      
+          $ProgramDetails_health = tb_init_user_program_detail::select('program_details_id','programName','category')
+                                                              ->where('userId',$id)
+                                                              ->get()
+                                                              ->groupBy('category');
+                                                  
+         
 
-      //  $resultArr2 = $search_child->toArray();
+                                                              
 
-        //Counting the rows returned
-       // $ChildCount = count($search_child );
+        //JSON_PRETTY_PRINT,JSON_FORCE_OBJECT
+        //$ProgramDetails = collect($ProgramDetails1)->tojson();
+        //$ProgramDetails = collection->diffAssoc($ProgramDetails1);
+        //$object = (object) $ProgramDetails1;
+/*
+        $object= object;
 
+        foreach ($ProgramDetails1 as $key => $value)
+    {
+      if (is_array($value))
+      {
+      $obj->$key = new stdClass();
+      array_to_obj($value, $obj->$key);
+      }
+      else
+      {
+        $obj->$key = $value;
+      }
+    } 
+                       //   $ProgramDetails2 = trim($ProgramDetails1, '[');
+
+             //   $ProgramDetails = trim($ProgramDetails2, ']');
         
-        $ProgramDetails = tb_init_user_program_detail::where('userId',$id)->get();
+          //  $ProgramDetails2 = Str::replaceArray('[',['{'], $ProgramDetails1);
 
+          //  $ProgramDetails = Str::replaceArray(']',['}'], $ProgramDetails2);
+*/
+             $HealthDetails = tb_init_user_extra_detail::where('userId',$id)->first();
 
-        $HealthDetails = tb_init_user_extra_detail::where('userId',$id)->get();
+             $GoalDetails = tb_init_user_goals::where('userId',$id)->get();
+              
+           //  $manage = json_decode($ProgramDetails1);
 
+          //  $manage =  str_replace (array('[', ']'), '' , $ProgramDetails1);
 
-        $GoalDetails = tb_init_user_goals::where('userId',$id)->get();
+          //  $manage = str_replace(array('[', ']'), '', htmlspecialchars(json_encode($manage), ENT_NOQUOTES));
 
-      // //Creating Array for Response
+      // //Creating Array for Response */
         $search['User_Details'] = $search_users;
         $search['Child_Details'] = $search_child;
         $search['GoalDetails'] = $GoalDetails;
-        $search['Program_Details'] = $ProgramDetails;
+        $search['Program_Details'] = $ProgramDetails_health;
         $search['Health_Details'] = $HealthDetails;
-                  
-    return response($search,200);
-        
-        
-        
-        
+
+        $ProgramDetails =json_encode($search,JSON_FORCE_OBJECT);
+
+       // $obj = (object)$search;
+
+      // $manage = json_decode($search, true);
+
+
+      // str_replace(array('[', ']'), '', htmlspecialchars(json_encode($ProgramDetails1), ENT_NOQUOTES));
+
+      // str_replace (array('[', ']'), '' , $ProgramDetails);
+
+       // $obj = json_encode($ProgramDetails);
+
+     //  $obj = collect($ProgramDetails1);
+
+      //   $yourJson = trim($ProgramDetails1, '[');
+               
+    return response($ProgramDetails,200);
+           
     }
 }

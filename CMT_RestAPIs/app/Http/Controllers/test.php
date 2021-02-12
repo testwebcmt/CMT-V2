@@ -21,7 +21,7 @@ class test extends BaseController
 
     public function irf(Request $request)
     {
-      
+        
 
         $validator = Validator::make($request->json()->all() , [
             'firstName' => 'required|string|max:255',
