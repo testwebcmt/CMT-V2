@@ -24,18 +24,18 @@ class reports extends BaseController
     {
 
      
-         if ($request->json()->has('category'))
+         if ($request->has('category'))
                 {  
-                    $catname= $request->json()->get('category');  
+                    $catname= $request->get('category');  
                   
-                    if ($request->json()->has('programName')) 
+                    if ($request->has('programName')) 
                         {
 
-                            $programname = $request->json()->get('programName');
+                            $programname = $request->get('programName');
 
-                            if ($request->json()->has('zipCode')) 
+                            if ($request->has('zipCode')) 
                                 {
-                                      $zipcode = $request->json()->get('zipCode');        
+                                      $zipcode = $request->get('zipCode');        
                   
                                       $result = DB::table('tb_init_user_details')
                                               ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
@@ -71,9 +71,9 @@ class reports extends BaseController
                             }
                         }
 
-                        else if ($request->json()->has('zipCode')) 
+                        else if ($request->has('zipCode')) 
                         {
-                              $zipcode = $request->json()->get('zipCode');        
+                              $zipcode = $request->get('zipCode');        
           
                               $result = DB::table('tb_init_user_details')
                                       ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
@@ -88,7 +88,7 @@ class reports extends BaseController
                           return response($search,200);
 
                          }
-                            $catname= $request->json()->get('category');        
+                            $catname= $request->get('category');        
                   
                             $result = DB::table('tb_init_user_details')
                                         ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
@@ -102,16 +102,16 @@ class reports extends BaseController
                             return response($search,200);
 
                 }
-         else if ($request->json()->has('programName'))
+         else if ($request->has('programName'))
                 {
 
-                  $programname = $request->json()->get('programName');
+                  $programname = $request->get('programName');
 
-                  if($request->json()->has('zipCode'))
+                  if($request->has('zipCode'))
 
                       {
 
-                        $zipcode = $request->json()->get('zipCode');                          
+                        $zipcode = $request->get('zipCode');                          
 
                         $result = DB::table('tb_init_user_details')
                                   ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
@@ -141,10 +141,10 @@ class reports extends BaseController
 
                 }
 
-         else if ($request->json()->has('zipCode'))
+         else if ($request->has('zipCode'))
                 {
                            
-                                $zipcode = $request->json()->get('zipCode');
+                                $zipcode = $request->get('zipCode');
 
                                 $result = DB::table('tb_init_user_details')
                                           ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
@@ -166,24 +166,24 @@ class reports extends BaseController
     {
 
      
-         if ($request->json()->has('category'))
+         if ($request->has('category'))
                 {  
-                    $catname= $request->json()->get('category');  
+                    $catname= $request->get('category');  
                   
-                    if ($request->json()->has('programName')) 
+                    if ($request->has('programName')) 
                         {
 
-                            $programname = $request->json()->get('programName');
+                            $programname = $request->get('programName');
 
-                            if ($request->json()->has('zipCode')) 
+                            if ($request->has('zipCode')) 
                                 {
-                                      $zipcode = $request->json()->get('zipCode');        
+                                      $zipcode = $request->get('zipCode');        
                   
                                       $result = DB::table('tb_init_user_details')
-                                              ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                              ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                                               ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode','tb_init_user_goals.user_goal_category_name','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_RatingBefore','tb_init_user_goals.user_goal_program_RatingAfter') 
                                               ->where('tb_init_user_goals.user_goal_category_name', $catname)
-                                              ->where('tb_init_user_goals.user_goal_program_name',$programname)
+                                              ->where('tb_init_user_goals.user_goal_program_name', $programname)
                                               ->where('tb_init_user_details.zipCode',$zipcode)
                                               ->groupBy('tb_init_user_details.userId')
                                               ->get(); 
@@ -198,7 +198,7 @@ class reports extends BaseController
                             {
 
                               $result = DB::table('tb_init_user_details')
-                              ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                              ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                               ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode','tb_init_user_goals.user_goal_category_name','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_RatingBefore','tb_init_user_goals.user_goal_program_RatingAfter') 
                               ->where('tb_init_user_goals.user_goal_category_name', $catname)
                               ->where('tb_init_user_goals.user_goal_program_name',$programname)
@@ -213,12 +213,12 @@ class reports extends BaseController
                             }
                         }
 
-                        else if ($request->json()->has('zipCode')) 
+                        else if ($request->has('zipCode')) 
                         {
-                              $zipcode = $request->json()->get('zipCode');        
+                              $zipcode = $request->get('zipCode');        
           
                               $result = DB::table('tb_init_user_details')
-                              ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                              ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                               ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode','tb_init_user_goals.user_goal_category_name','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_RatingBefore','tb_init_user_goals.user_goal_program_RatingAfter') 
                               ->where('tb_init_user_goals.user_goal_category_name', $catname)
                               ->where('tb_init_user_details.zipCode',$zipcode)
@@ -230,10 +230,10 @@ class reports extends BaseController
                           return response($search,200);
 
                          }
-                            $catname= $request->json()->get('category');        
+                            $catname= $request->get('category');        
                   
                             $result = DB::table('tb_init_user_details')
-                            ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                            ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                             ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode','tb_init_user_goals.user_goal_category_name','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_RatingBefore','tb_init_user_goals.user_goal_program_RatingAfter') 
                             ->where('tb_init_user_goals.user_goal_category_name', $catname)
                             ->groupBy('tb_init_user_details.userId')
@@ -244,19 +244,19 @@ class reports extends BaseController
                             return response($search,200);
 
                 }
-         else if ($request->json()->has('programName'))
+         else if ($request->has('programName'))
                 {
 
-                  $programname = $request->json()->get('programName');
+                  $programname = $request->get('programName');
 
-                  if($request->json()->has('zipCode'))
+                  if($request->has('zipCode'))
 
                       {
 
-                        $zipcode = $request->json()->get('zipCode');                          
+                        $zipcode = $request->get('zipCode');                          
 
                         $result = DB::table('tb_init_user_details')
-                                  ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                  ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                                   ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode','tb_init_user_goals.user_goal_category_name','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_RatingBefore','tb_init_user_goals.user_goal_program_RatingAfter') 
                                   ->where('tb_init_user_goals.user_goal_program_name',$programname)
                                   ->where('tb_init_user_details.zipCode',$zipcode)
@@ -271,7 +271,7 @@ class reports extends BaseController
 
                         
                       $result = DB::table('tb_init_user_details')
-                      ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                      ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                       ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode','tb_init_user_goals.user_goal_category_name','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_RatingBefore','tb_init_user_goals.user_goal_program_RatingAfter') 
                       ->where('tb_init_user_goals.user_goal_program_name',$programname)
                       ->groupBy('tb_init_user_details.userId')
@@ -283,13 +283,13 @@ class reports extends BaseController
 
                 }
 
-         else if ($request->json()->has('zipCode'))
+         else if ($request->has('zipCode'))
                 {
                            
-                                $zipcode = $request->json()->get('zipCode');
+                                $zipcode = $request->get('zipCode');
 
                                 $result = DB::table('tb_init_user_details')
-                                ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                                 ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode','tb_init_user_goals.user_goal_category_name','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_RatingBefore','tb_init_user_goals.user_goal_program_RatingAfter') 
                                 ->where('tb_init_user_details.zipCode',$zipcode)
                                 ->groupBy('tb_init_user_details.userId')
@@ -308,21 +308,21 @@ class reports extends BaseController
     {
 
      
-         if ($request->json()->has('category'))
+         if ($request->has('category'))
                 {  
-                    $catname= $request->json()->get('category');  
+                    $catname= $request->get('category');  
                   
-                    if ($request->json()->has('programName')) 
+                    if ($request->has('programName')) 
                         {
 
-                            $programname = $request->json()->get('programName');
+                            $programname = $request->get('programName');
 
-                            if ($request->json()->has('zipCode')) 
+                            if ($request->has('zipCode')) 
                                 {
-                                      $zipcode = $request->json()->get('zipCode');        
+                                      $zipcode = $request->get('zipCode');        
                   
                                       $result = DB::table('tb_init_user_details')
-                                              ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                              ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                                               ->select('tb_init_user_details.userId','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_status','tb_init_user_goals.user_goal_program_participantcomments','tb_init_user_goals.user_goal_program_additionalcomments','tb_init_user_details.notes') 
                                               ->where('tb_init_user_goals.user_goal_category_name', $catname)
                                               ->where('tb_init_user_goals.user_goal_program_name',$programname)
@@ -340,7 +340,7 @@ class reports extends BaseController
                             {
 
                               $result = DB::table('tb_init_user_details')
-                              ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                              ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                               ->select('tb_init_user_details.userId','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_status','tb_init_user_goals.user_goal_program_participantcomments','tb_init_user_goals.user_goal_program_additionalcomments','tb_init_user_details.notes') 
                               ->where('tb_init_user_goals.user_goal_category_name', $catname)
                               ->where('tb_init_user_goals.user_goal_program_name',$programname)
@@ -355,12 +355,12 @@ class reports extends BaseController
                             }
                         }
 
-                        else if ($request->json()->has('zipCode')) 
+                        else if ($request->has('zipCode')) 
                         {
-                              $zipcode = $request->json()->get('zipCode');        
+                              $zipcode = $request->get('zipCode');        
           
                               $result = DB::table('tb_init_user_details')
-                              ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                              ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                               ->select('tb_init_user_details.userId','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_status','tb_init_user_goals.user_goal_program_participantcomments','tb_init_user_goals.user_goal_program_additionalcomments','tb_init_user_details.notes') 
                               ->where('tb_init_user_goals.user_goal_category_name', $catname)
                               ->where('tb_init_user_details.zipCode',$zipcode)
@@ -372,10 +372,10 @@ class reports extends BaseController
                           return response($search,200);
 
                          }
-                            $catname= $request->json()->get('category');        
+                            $catname= $request->get('category');        
                   
                             $result = DB::table('tb_init_user_details')
-                            ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                            ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                             ->select('tb_init_user_details.userId','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_status','tb_init_user_goals.user_goal_program_participantcomments','tb_init_user_goals.user_goal_program_additionalcomments','tb_init_user_details.notes') 
                             ->where('tb_init_user_goals.user_goal_category_name', $catname)
                             ->groupBy('tb_init_user_details.userId')
@@ -386,19 +386,19 @@ class reports extends BaseController
                             return response($search,200);
 
                 }
-         else if ($request->json()->has('programName'))
+         else if ($request->has('programName'))
                 {
 
-                  $programname = $request->json()->get('programName');
+                  $programname = $request->get('programName');
 
-                  if($request->json()->has('zipCode'))
+                  if($request->has('zipCode'))
 
                       {
 
-                        $zipcode = $request->json()->get('zipCode');                          
+                        $zipcode = $request->get('zipCode');                          
 
                         $result = DB::table('tb_init_user_details')
-                                  ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                  ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                                   ->select('tb_init_user_details.userId','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_status','tb_init_user_goals.user_goal_program_participantcomments','tb_init_user_goals.user_goal_program_additionalcomments','tb_init_user_details.notes') 
                                   ->where('tb_init_user_goals.user_goal_program_name',$programname)
                                   ->where('tb_init_user_details.zipCode',$zipcode)
@@ -413,7 +413,7 @@ class reports extends BaseController
 
                         
                       $result = DB::table('tb_init_user_details')
-                      ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                      ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                       ->select('tb_init_user_details.userId','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_status','tb_init_user_goals.user_goal_program_participantcomments','tb_init_user_goals.user_goal_program_additionalcomments','tb_init_user_details.notes') 
                       ->where('tb_init_user_goals.user_goal_program_name',$programname)
                       ->groupBy('tb_init_user_details.userId')
@@ -425,13 +425,13 @@ class reports extends BaseController
 
                 }
 
-         else if ($request->json()->has('zipCode'))
+         else if ($request->has('zipCode'))
                 {
                            
-                                $zipcode = $request->json()->get('zipCode');
+                                $zipcode = $request->get('zipCode');
 
                                 $result = DB::table('tb_init_user_details')
-                                ->join('tb_init_user_goals`','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                ->join('tb_init_user_goals','tb_init_user_details.userId','=','tb_init_user_goals.userId') 
                                 ->select('tb_init_user_details.userId','tb_init_user_goals.user_goal_program_name','tb_init_user_goals.user_goal_program_status','tb_init_user_goals.user_goal_program_participantcomments','tb_init_user_goals.user_goal_program_additionalcomments','tb_init_user_details.notes') 
                                 ->where('tb_init_user_details.zipCode',$zipcode)
                                 ->groupBy('tb_init_user_details.userId')

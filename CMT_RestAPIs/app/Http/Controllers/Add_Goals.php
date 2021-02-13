@@ -75,17 +75,28 @@ class Add_Goals extends BaseController
                                                                                         ->pluck('programName');
                                                                                         
        
-        $AfterschoolResults = DB::Table('tb_init_user_program_details')->select('programName')->where('userId',$id)
+        $AfterschoolResults = DB::Table('tb_init_user_program_details')->where('userId',$id)
                                                                                         ->where('category','AfterSchool')
                                                                                         ->pluck('programName');
                                                                                         
        
+                                                
+                                                                                       if(empty($AfterschoolResults))
+                                                                                       {
+                                                                                        $search['HealthResults'] = $HealthResults;
+                                                                                        $search['EmploymentResults'] = $EmploymentResults;
+                                                                                        $search['NeighbourhoodResults'] = $NeighbourhoodResults;
+                                                                                        $search['StaffResults'] = $StaffResults;
+                                                                                       }
+                                                                                       else
+                                                                                       {
                                                                                         $search['HealthResults'] = $HealthResults;
                                                                                         $search['EmploymentResults'] = $EmploymentResults;
                                                                                         $search['NeighbourhoodResults'] = $NeighbourhoodResults;
                                                                                         $search['StaffResults'] = $StaffResults;
                                                                                         $search['AfterschoolResults'] = $AfterschoolResults;                                                                             
-        
+                                                                                       
+                                                                                       }
          return response($search, 200);
 
     
