@@ -75,26 +75,37 @@ class Add_Goals extends BaseController
                                                                                         ->pluck('programName');
                                                                                         
        
-        $AfterschoolResults = DB::Table('tb_init_user_program_details')->where('userId',$id)
-                                                                                        ->where('category','AfterSchool')
-                                                                                        ->pluck('programName');
+        $data1= tb_init_user_program_detail::where('userId', $id)
+                                            ->where('category','AfterSchool')
+                                            ->first();
                                                                                         
        
                                                 
-                                                                                       if(empty($AfterschoolResults))
+                                                                                       if(!empty($data1))
                                                                                        {
+
+                                                                                        $AfterschoolResults = DB::Table('tb_init_user_program_details')->where('userId',$id)
+                                                                                                                ->where('category','AfterSchool')
+                                                                                                                ->pluck('programName');
+                                                                                  
+
                                                                                         $search['HealthResults'] = $HealthResults;
                                                                                         $search['EmploymentResults'] = $EmploymentResults;
                                                                                         $search['NeighbourhoodResults'] = $NeighbourhoodResults;
                                                                                         $search['StaffResults'] = $StaffResults;
-                                                                                       }
+                                                                                        $search['AfterschoolResults'] = $AfterschoolResults; 
+                                                                                       
+                                                                                        }
                                                                                        else
                                                                                        {
+                                                                                        
+                                                                                      
+
                                                                                         $search['HealthResults'] = $HealthResults;
                                                                                         $search['EmploymentResults'] = $EmploymentResults;
                                                                                         $search['NeighbourhoodResults'] = $NeighbourhoodResults;
                                                                                         $search['StaffResults'] = $StaffResults;
-                                                                                        $search['AfterschoolResults'] = $AfterschoolResults;                                                                             
+                                                                                                                                                                    
                                                                                        
                                                                                        }
          return response($search, 200);
