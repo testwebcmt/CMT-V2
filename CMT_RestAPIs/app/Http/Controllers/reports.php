@@ -446,5 +446,232 @@ class reports extends BaseController
                 
     }  
 
+    public function returnprograms(Request $request)
+    {
+      if ($request->has('category'))
+      {  
+          $catname= $request->get('category');  
+        
+          if ($request->has('zipCode')) 
+              {
+                  $zipcode = $request->get('zipCode');
+      
+                  $Results = DB::Table('tb_init_user_program_details')->select('programName')
+                                                                ->where('category',$catname)
+                                                                ->where('zipCode',$zipcode)
+                                                                ->pluck('programName');
+
+                                                                $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                                //  $Results1 ->all();
+    
+                                                                    $search['reportprograms'] = $Results1;
+    
+                                                                    return response($search,200);
+
+              }
+          else
+          {
+              
+            $Results = DB::Table('tb_init_user_program_details')->select('programName')
+                                                                ->where('category',$catname)
+                                                                ->pluck('programName');
+
+                                                              $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                            //  $Results1 ->all();
+
+                                                                $search['reportprograms'] = $Results1;
+
+                                                                return response($search,200);
+          }
+      }
+      else if($request->has('zipCode'))
+      {
+        $zipcode = $request->get('zipCode');
+      
+        $Results = DB::Table('tb_init_user_program_details')->select('programName')
+                                                      ->where('zipCode',$zipcode)
+                                                      ->pluck('programName');
+
+                                                      $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                      //  $Results1 ->all();
+
+                                                          $search['reportprograms'] = $Results1;
+
+                                                          return response($search,200);
+
+      }
+      else
+      {
+        $Results = DB::Table('tb_init_user_program_details')->select('programName')
+                                                            ->pluck('programName')
+                                                            ->unique();
+
+                                                            $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                            //  $Results1 ->all();
+
+                                                                $search['reportprograms'] = $Results1;
+
+                                                                return response($search,200);
+
+                    
+      }
+
+    }
+
+    public function returncategory(Request $request)
+    {
+      if ($request->has('programName'))
+      {  
+          $catname= $request->get('programName');  
+        
+          if ($request->has('zipCode')) 
+              {
+                  $zipcode = $request->get('zipCode');
+      
+                  $Results = DB::Table('tb_init_user_program_details')->select('category')
+                                                                ->where('programName',$catname)
+                                                                ->where('zipCode',$zipcode)
+                                                                ->pluck('category');
+
+                                                                $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                                //  $Results1 ->all();
+    
+                                                                    $search['reportcategory'] = $Results1;
+    
+                                                                    return response($search,200);
+
+              }
+          else
+          {
+              
+            $Results = DB::Table('tb_init_user_program_details')->select('category')
+                                                                ->where('programName',$catname)
+                                                                ->pluck('category');
+
+                                                              $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                            //  $Results1 ->all();
+
+                                                                $search['reportcategory'] = $Results1;
+
+                                                                return response($search,200);
+          }
+      }
+      else if($request->has('zipCode')) 
+      {
+          $zipcode = $request->get('zipCode');
+
+          $Results = DB::Table('tb_init_user_program_details')->select('category')
+                                                         ->where('zipCode',$zipcode)
+                                                        ->pluck('category');
+
+                                                        $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                        //  $Results1 ->all();
+
+                                                            $search['reportcategory'] = $Results1;
+
+                                                            return response($search,200);
+
+      }
+      else
+      {
+        $Results = DB::Table('tb_init_user_program_details')->select('category')
+                                                            ->pluck('category');
+                                                            
+
+                                                            $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                            //  $Results1 ->all();
+
+                                                                $search['reportcategory'] = $Results1;
+
+                                                                return response($search,200);
+
+                    
+      }
+
+    }
+
+    public function returnzipcode(Request $request)
+    {
+      if ($request->has('category'))
+      {  
+          $catname= $request->get('category');  
+        
+          if ($request->has('programName')) 
+              {
+                  $zipcode = $request->get('programName');
+      
+                  $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
+                                                                ->where('category',$catname)
+                                                                ->where('programName',$zipcode)
+                                                                ->pluck('zipCode');
+
+                                                                $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                                //  $Results1 ->all();
+    
+                                                                    $search['reportcodes'] = $Results1;
+    
+                                                                    return response($search,200);
+
+              }
+          else
+          {
+              
+            $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
+                                                                ->where('category',$catname)
+                                                                ->pluck('zipCode');
+
+                                                              $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                            //  $Results1 ->all();
+
+                                                                $search['reportcodes'] = $Results1;
+
+                                                                return response($search,200);
+          }
+      }
+      else if($request->has('programName')) 
+      {
+          $zipcode = $request->get('programName');
+
+          $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
+                                                         ->where('programName',$zipcode)
+                                                        ->pluck('zipCode');
+
+                                                        $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                        //  $Results1 ->all();
+
+                                                            $search['reportcodes'] = $Results1;
+
+                                                            return response($search,200);
+
+      }
+      else
+      {
+        $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
+                                                            ->pluck('zipCode');
+                                                            
+
+                                                            $Results1 = $Results -> flatten()-> unique()-> values()->all();
+
+                                                            //  $Results1 ->all();
+
+                                                                $search['reportcodes'] = $Results1;
+
+                                                                return response($search,200);
+
+                    
+      }
+
+    }
 
 }
