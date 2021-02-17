@@ -456,9 +456,16 @@ class reports extends BaseController
               {
                   $zipcode = $request->get('zipCode');
       
-                  $Results = DB::Table('tb_init_user_program_details')->select('programName')
-                                                                ->where('category',$catname)
-                                                                ->where('zipCode',$zipcode)
+               //   $Results = DB::Table('tb_init_user_program_details')->select('programName')
+                 //                                               ->where('category',$catname)
+                   //                                             ->where('zipCode',$zipcode)
+                     //                                           ->pluck('programName');
+
+                                                                $Results = DB::table('tb_init_user_details')
+                                                                ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                                                ->select('tb_init_user_program_details.programName') 
+                                                                ->where('tb_init_user_program_details.category',$catname)
+                                                                ->where('tb_init_user_details.zipCode',$zipcode)
                                                                 ->pluck('programName');
 
                                                                 $Results1 = $Results -> flatten()-> unique()-> values()->all();
@@ -473,9 +480,11 @@ class reports extends BaseController
           else
           {
               
-            $Results = DB::Table('tb_init_user_program_details')->select('programName')
-                                                                ->where('category',$catname)
-                                                                ->pluck('programName');
+            $Results = DB::table('tb_init_user_details')
+            ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+            ->select('tb_init_user_program_details.programName') 
+            ->where('tb_init_user_program_details.category',$catname)
+            ->pluck('programName');
 
                                                               $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
@@ -490,9 +499,11 @@ class reports extends BaseController
       {
         $zipcode = $request->get('zipCode');
       
-        $Results = DB::Table('tb_init_user_program_details')->select('programName')
-                                                      ->where('zipCode',$zipcode)
-                                                      ->pluck('programName');
+        $Results = DB::table('tb_init_user_details')
+        ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+        ->select('tb_init_user_program_details.programName') 
+        ->where('tb_init_user_details.zipCode',$zipcode)
+        ->pluck('programName');
 
                                                       $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
@@ -505,9 +516,10 @@ class reports extends BaseController
       }
       else
       {
-        $Results = DB::Table('tb_init_user_program_details')->select('programName')
-                                                            ->pluck('programName')
-                                                            ->unique();
+        $Results = DB::table('tb_init_user_details')
+        ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+        ->select('tb_init_user_program_details.programName') 
+         ->pluck('programName');
 
                                                             $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
@@ -532,10 +544,12 @@ class reports extends BaseController
               {
                   $zipcode = $request->get('zipCode');
       
-                  $Results = DB::Table('tb_init_user_program_details')->select('category')
-                                                                ->where('programName',$catname)
-                                                                ->where('zipCode',$zipcode)
-                                                                ->pluck('category');
+                  $Results = DB::table('tb_init_user_details')
+                  ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                  ->select('tb_init_user_program_details.category') 
+                  ->where('tb_init_user_program_details.programName',$catname)
+                  ->where('tb_init_user_details.zipCode',$zipcode)
+                  ->pluck('category');
 
                                                                 $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
@@ -549,10 +563,11 @@ class reports extends BaseController
           else
           {
               
-            $Results = DB::Table('tb_init_user_program_details')->select('category')
-                                                                ->where('programName',$catname)
-                                                                ->pluck('category');
-
+            $Results = DB::table('tb_init_user_details')
+                  ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                  ->select('tb_init_user_program_details.category') 
+                  ->where('tb_init_user_program_details.programName',$catname)
+                  ->pluck('category');
                                                               $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
                                                             //  $Results1 ->all();
@@ -566,9 +581,11 @@ class reports extends BaseController
       {
           $zipcode = $request->get('zipCode');
 
-          $Results = DB::Table('tb_init_user_program_details')->select('category')
-                                                         ->where('zipCode',$zipcode)
-                                                        ->pluck('category');
+          $Results = DB::table('tb_init_user_details')
+                  ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                  ->select('tb_init_user_program_details.category') 
+                  ->where('tb_init_user_details.zipCode',$zipcode)
+                  ->pluck('category');
 
                                                         $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
@@ -581,8 +598,10 @@ class reports extends BaseController
       }
       else
       {
-        $Results = DB::Table('tb_init_user_program_details')->select('category')
-                                                            ->pluck('category');
+        $Results = DB::table('tb_init_user_details')
+        ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+        ->select('tb_init_user_program_details.category') 
+        ->pluck('category');
                                                             
 
                                                             $Results1 = $Results -> flatten()-> unique()-> values()->all();
@@ -608,9 +627,11 @@ class reports extends BaseController
               {
                   $zipcode = $request->get('programName');
       
-                  $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
-                                                                ->where('category',$catname)
-                                                                ->where('programName',$zipcode)
+                  $Results = DB::table('tb_init_user_details')
+                                                                ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                                                ->select('tb_init_user_details.zipCode') 
+                                                                ->where('tb_init_user_program_details.category',$catname)
+                                                                ->where('tb_init_user_program_details.programName',$zipcode)
                                                                 ->pluck('zipCode');
 
                                                                 $Results1 = $Results -> flatten()-> unique()-> values()->all();
@@ -625,9 +646,11 @@ class reports extends BaseController
           else
           {
               
-            $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
-                                                                ->where('category',$catname)
-                                                                ->pluck('zipCode');
+            $Results = DB::table('tb_init_user_details')
+            ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+            ->select('tb_init_user_details.zipCode') 
+            ->where('tb_init_user_program_details.category',$catname)
+            ->pluck('zipCode');
 
                                                               $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
@@ -642,9 +665,11 @@ class reports extends BaseController
       {
           $zipcode = $request->get('programName');
 
-          $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
-                                                         ->where('programName',$zipcode)
-                                                        ->pluck('zipCode');
+          $Results = DB::table('tb_init_user_details')
+                                                                ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                                                ->select('tb_init_user_details.zipCode') 
+                                                                ->where('tb_init_user_program_details.programName',$zipcode)
+                                                                ->pluck('zipCode');
 
                                                         $Results1 = $Results -> flatten()-> unique()-> values()->all();
 
@@ -657,8 +682,11 @@ class reports extends BaseController
       }
       else
       {
-        $Results = DB::Table('tb_init_user_program_details')->select('zipCode')
-                                                            ->pluck('zipCode');
+        $Results = DB::table('tb_init_user_details')
+                                                                ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                                                                ->select('tb_init_user_details.zipCode') 
+                                                                ->pluck('zipCode'); 
+
                                                             
 
                                                             $Results1 = $Results -> flatten()-> unique()-> values()->all();
