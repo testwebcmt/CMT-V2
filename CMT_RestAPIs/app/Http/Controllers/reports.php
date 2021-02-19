@@ -158,6 +158,21 @@ class reports extends BaseController
                                 return response($search,200);
 
                 }
+            else
+            {
+
+                    $result = DB::table('tb_init_user_details')
+                        ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                         ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode',DB::raw('group_concat(DISTINCT(tb_init_user_program_details.programName)) AS programName'),DB::raw('group_concat(DISTINCT(tb_init_user_program_details.category)) AS category')) 
+                        ->groupBy('tb_init_user_details.userId')
+                        ->get();
+              
+                       
+              $search['programreport'] = $result;
+
+              return response($search,200);
+
+            }
                
                 
     }
@@ -299,6 +314,22 @@ class reports extends BaseController
 
                                 return response($search,200);
 
+                }
+
+                else
+                {
+    
+                        $result = DB::table('tb_init_user_details')
+                            ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                             ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode',DB::raw('group_concat(DISTINCT(tb_init_user_program_details.programName)) AS programName'),DB::raw('group_concat(DISTINCT(tb_init_user_program_details.category)) AS category')) 
+                            ->groupBy('tb_init_user_details.userId')
+                            ->get();
+                  
+                           
+                  $search['goalreport'] = $result;
+    
+                  return response($search,200);
+    
                 }
                
                 
@@ -442,6 +473,23 @@ class reports extends BaseController
                                 return response($search,200);
 
                 }
+
+                else
+                {
+    
+                        $result = DB::table('tb_init_user_details')
+                            ->join('tb_init_user_program_details','tb_init_user_details.userId','=','tb_init_user_program_details.userId') 
+                             ->select('tb_init_user_details.userId','tb_init_user_details.firstName','tb_init_user_details.lastName','tb_init_user_details.email','tb_init_user_details.phoneCell','tb_init_user_details.zipCode',DB::raw('group_concat(DISTINCT(tb_init_user_program_details.programName)) AS programName'),DB::raw('group_concat(DISTINCT(tb_init_user_program_details.category)) AS category')) 
+                            ->groupBy('tb_init_user_details.userId')
+                            ->get();
+                  
+                           
+                  $search['notesreport'] = $result;
+    
+                  return response($search,200);
+    
+                }
+             
                
                 
     }  

@@ -48,7 +48,7 @@ Route::post('childdelete', 'App\Http\Controllers\Child_Details@Childdelete');
 
 Route::post('addchild', 'App\Http\Controllers\Child_Details@addchild');
 
-Route::get('reports', 'App\Http\Controllers\reports@goalreport');
+Route::get('reports', 'App\Http\Controllers\reports@programreport');
 
 Route::get('getprograms/{id}', 'App\Http\Controllers\Add_Goals@getprogramdetails');
 
